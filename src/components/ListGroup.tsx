@@ -1,14 +1,14 @@
-import { MouseEvent } from "react";
+// import { MouseEvent } from "react";
+import { useState } from "react";
 
-function ListGroup() {
-  let items = [
-    "Apple",
-    "Banana",
-    "Cherry",
-    "Dragonfruit",
-    "Elderberry", // Added an extra item to test the error handling in the component
-  ];
-//   items = [];
+interface Props {
+  items: string[];
+  heading: string;
+}
+
+function ListGroup({ items, heading }: Props) {
+  //   items = [];
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const Message = items.length === 0 && <p>No items found.</p>;
 
@@ -16,15 +16,27 @@ function ListGroup() {
     return Message;
   };
 
-  const handleClick = (event: MouseEvent) => console.log(event);
+  //   const handleClick = (event: MouseEvent) => console.log(event);
 
   return (
     <>
-      <h1>The List</h1>
+      <h1>{heading}</h1>
       {Message1()}
-      <ul className="list-group-item" onClick={handleClick}>
-        {items.map((item) => (
-          <li key={item}>{item}</li>
+      <ul className="list-group">
+        {items.map((item, index) => (
+          <li
+            key={item}
+            onClick={() => {
+              setSelectedIndex(index);
+            }}
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </>
