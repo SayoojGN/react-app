@@ -9,13 +9,16 @@ function App() {
     "Dragonfruit",
     "Elderberry", // Added an extra item to test the error handling in the component
   ];
+  const handleSelectItem = (item: string) => {
+    console.log(`Selected item: ${item}`);
+  }
   return (
     <>
       <div>
         <Message />
         <p>Welcome to my React App!</p>
       </div>
-      <ListGroup items={items} heading="Fruits" />
+      <ListGroup items={items} heading="Fruits" onSelectItem={handleSelectItem}/>
     </>
   );
 }
